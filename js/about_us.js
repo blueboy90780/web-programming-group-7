@@ -15,14 +15,20 @@ function openModal(memberId) {
       break;
     case "member2":
       memberDetails = `
-          <h2>Member 2</h2>
-          <p>Details about Member 2...</p>
+          <h2>Dang Minh Tam</h2>
+          <p>Role: Developer</p>
+          <p>Age: 20</p>
+          <p>Degree: Bachelor of IT</p>
+          <p>Interest: Data Analyst</p>
         `;
       break;
     case "member3":
       memberDetails = `
-          <h2>Member 3</h2>
-          <p>Details about Member 3...</p>
+          <h2>Lam Nguyen Nhat</h2>
+          <p>Role: Developer</p>
+          <p>Age: 24</p>
+          <p>Degree: Bachelor of IT</p>
+          <p>Interest: Web Development</p>
         `;
       break;
   }
