@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <form id="registerForm" class="form">
+    <h2>Register</h2>
+    <div class="input-group">
+      <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="phone" name="phone" placeholder="Phone" required>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="input-group">
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="address" name="address" placeholder="Address" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="city" name="city" placeholder="City" required>
+    </div>
+    <div class="input-group">
+      <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code" required>
+    </div>
+    <div class="input-group">
+      <select id="country" name="country" required></select>
+    </div>
+    <div class="input-group">
+      <label>
+        <input type="radio" name="accountType" value="user" checked> User
+      </label>
+      <label>
+        <input type="radio" name="accountType" value="storeOwner"> Store Owner
+      </label>
+    </div>
+    <div class="store-owner-fields" style="display:none;">
+      <div class="input-group">
+        <input type="text" id="businessName" name="businessName" placeholder="Business Name">
+      </div>
+      <div class="input-group">
+        <input type="text" id="storeName" name="storeName" placeholder="Store Name">
+      </div>
+      <div class="input-group">
+        <input type="text" id="storeCategory" name="storeCategory" placeholder="Store Category">
+      </div>
+    </div>
+    <button type="submit" class="btn">Register</button>
+    <a href="log_in.html" class="btn" id="backToLoginBtn">Back to Login</a>
+  </form>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>

@@ -1,131 +1,164 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const accountType = document.getElementById('accountType');
-  const storeOwnerFields = document.querySelector('.store-owner-fields');
+const express = require('express');
+const mysql = require('mysql');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
-  accountType.addEventListener('change', function() {
-    if (this.querySelector('input[name="accountType"]:checked').value === 'storeOwner') {
-      storeOwnerFields.style.display = 'block';
-    } else {
-      storeOwnerFields.style.display = 'none';
-    }
-  });
+const app = express();
+const port = 3000;
 
-  const countrySelect = document.getElementById('country');
+const SECRET_KEY = 'your-secret-key';
 
-  fetch('countries.json')
-    .then(response => response.json())
-    .then(data => {
-      console.log('Fetched data:', data);
-      data.forEach(country => {
-        const option = document.createElement('option');
-        option.value = country.Code; 
-        option.text = country.Name;
-        countrySelect.add(option);
-      });
-    })
-    .catch(error => console.error('Error fetching countries:', error));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'user_db'
 });
 
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  fetch('/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Login successful');
-    } else {
-      console.error('Login failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('MySQL connected');
 });
 
-document.getElementById('registerForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = {
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    password: document.getElementById('password').value,
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    address: document.getElementById('address').value,
-    city: document.getElementById('city').value,
-    zipcode: document.getElementById('zipcode').value,
-    country: document.getElementById('country').value,
-    accountType: document.querySelector('input[name="accountType"]:checked').value,
-    businessName: document.getElementById('businessName').value,
-    storeName: document.getElementById('storeName').value,
-    storeCategory: document.getElementById('storeCategory').value
-  };
-  console.log('Form Data:', formData);
+app.post('/register', async (req, res) => {
+  const { email, phone, password, firstName, lastName, address, city, zipcode, country, accountType, businessName, storeName, storeCategory } = req.body;
 
-  fetch('/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Registration successful');
-      window.location.href = 'log_in.html';
-    } else {
-      console.error('Registration failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-});
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const query = 'INSERT INTO users (email, phone, password, first_name, last_name, address, city, zipcode, country, account_type, business_name, store_name, store_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const values = [email, phone, hashedPassword, firstName, lastName, address, city, zipcode, country, accountType, businessName || null, storeName || null, storeCategory || null];
 
-document.getElementById('confirmPassword').addEventListener('input', (e) => {
-  const password = document.getElementById('password').value;
-  const confirmPassword = e.target.value;
+    db.query(query, values, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      }
 
-  if (password !== confirmPassword) {
-    e.target.setCustomValidity('Passwords do not match');
-  } else {
-    e.target.setCustomValidity('');
+      return res.status(200).send('Registration successful');
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send('Internal Server Error');
   }
 });
 
-document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  console.log('Password reset requested for email:', email);
-});
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
 
-document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
-  e.preventDefault();
+  const query = 'SELECT * FROM users WHERE email = ? OR phone = ?';
+  db.query(query, [email, email], async (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
 
-  const email = document.getElementById('email').value;
-  fetch('/forgot-password', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
-  })
-  .then(response => {
-      if (response.ok) {
-          console.log('Password reset email sent successfully');
-      } else {
-          console.error('Failed to send password reset email');
-      }
-  })
-  .catch(error => {
-      console.error('Error:', error);
+    if (results.length === 0) {
+      return res.status(401).send('Invalid email/phone or password');
+    }
+
+    const user = results[0];
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).send('Invalid email/phone or password');
+    }
+
+    const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ token });
   });
 });
+
+app.post('/forgot-password', (req, res) => {
+  const { email } = req.body;
+
+  const query = 'SELECT * FROM users WHERE email = ?';
+  db.query(query, [email], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    if (results.length === 0) {
+      return res.status(400).send('Email not found');
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+
+    const updateQuery = 'UPDATE users SET reset_token = ? WHERE email = ?';
+    db.query(updateQuery, [token, email], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      }
+
+      sendPasswordResetEmail(email, token);
+
+      return res.status(200).send('Password reset email sent');
+    });
+  });
+});
+
+function sendPasswordResetEmail(email, token) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'your-email@gmail.com',
+      pass: 'your-email-password'
+    }
+  });
+
+  const mailOptions = {
+    from: 'your-email@gmail.com',
+    to: email,
+    subject: 'Password Reset',
+    text: `You are receiving this email because you (or someone else) has requested a password reset for your account. Please click on the following link or paste it into your browser to complete the process:\n\nhttp://your-app-url.com/reset-password/${token}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.`
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.error('Error sending email:', err);
+    } else {
+      console.log('Email sent:', info.response);
+    }
+  });
+}
+
+app.post('/reset-password', (req, res) => {
+  const { token, newPassword } = req.body;
+
+  const query = 'SELECT * FROM users WHERE reset_token = ?';
+  db.query(query, [token], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    if (results.length === 0) {
+      return res.status(400).send('Invalid token');
+    }
+
+    const user = results[0];
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+    const updateQuery = 'UPDATE users SET password = ?, reset_token = NULL WHERE id = ?';
+
+    db.query(updateQuery, [hashedPassword, user.id], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+      }
+
+      return res.status(200).send('Password reset successful');
+    });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
