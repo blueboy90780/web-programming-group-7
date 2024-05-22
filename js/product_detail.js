@@ -8,6 +8,6 @@ function addToCart(event, productName) {
 }
 
 function showCart() {
-  // You can implement functionality to show the cart here
+  // Implement functionality to show the cart here
   alert('Display the cart here!');
 }
