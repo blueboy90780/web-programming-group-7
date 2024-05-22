@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product 2 Details</title>
+  <link rel="stylesheet" href="product_detail.css">
+</head>
+<body>
+  <div class="cart-icon">
+    <img src="cart-icon.png" alt="Cart Icon" onclick="showCart()">
+    <div class="cart-count" id="cartCount">0</div>
+  </div>
+
+  <div class="container">
+    <h2>Product 3 Details</h2>
+    <div class="product-details">
+      <img src="product2.jpg" alt="Product 3">
+      <div>
+        <h3>Great Value</h3>
+        <p>Description: Great Value Cultivated Blueberries, 600g.</p>
+        <p>Price: $49.99</p>
+        <button class="add-to-cart" onclick="addToCart(event, 'Great Value')">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
