@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const backToLoginBtn = document.getElementById('backToLoginBtn');
 
   registerForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const formData = new FormData(registerForm);
 
@@ -67,10 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
       e.target.setCustomValidity('');
     }
   });
-  const resetPasswordForm = document.getElementById('resetPasswordForm');
 
-  resetPasswordForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+  const loginForm = document.getElementById('loginForm');
+
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault(); 
 
     alert('A recovery email has been sent. Please check your inbox.');
     window.location.href = 'log_in.html';
