@@ -67,34 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
       e.target.setCustomValidity('');
     }
   });
+  const resetPasswordForm = document.getElementById('resetPasswordForm');
 
-  document.getElementById('resetPasswordForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newPassword = document.getElementById('newPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const token = new URLSearchParams(window.location.search).get('token');
+  resetPasswordForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-    if (newPassword !== confirmPassword) {
-      console.error('Passwords do not match');
-      return;
-    }
-
-    fetch('/reset-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token, newPassword })
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Password reset successful');
-      } else {
-        console.error('Failed to reset password');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+    alert('A recovery email has been sent. Please check your inbox.');
+    window.location.href = 'log_in.html';
   });
 });
