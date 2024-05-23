@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mall Home</title>
+    <meta name="description" content="Your premier online shopping destination" />
+    <meta name="keywords" content="ecommerce, shopping, products, stores" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="../css/mainhall.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="../js/mainhall.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../static/GB Mart Logo.png" alt="Mall Logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="mainhall.html">Home</a></li>
+          <li><a href="../html/about_us.html">About Us</a></li>
+          <li><a href="../html/fees.html">Fees</a></li>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Browse</a></li>
+          <li><a href="../html/faq.html">FAQs</a></li>
+          <li><a href="../html/contact_us.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="../log_in_page/log_in.html" class="login-button">Log In</a>
+    </header>
+    <main>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Enter searching here" autocomplete="off" />
+        <button type="button" id="search-button">Search</button>
+        <div id="search-suggestions"></div>
+      </div>
+      <div class="advertisement-carousel swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="advertise/advertise1.jpeg" alt="Advertisement 1" loading="lazy" />
+          </div>
+          <div class="swiper-slide">
+            <a href="../html/advertise.html">
+             <img src="advertise/advertise2.jpeg" alt="Advertisement 2" loading="lazy" />
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <img src="advertise/advertise3.jpeg" alt="Advertisement 3" loading="lazy" />
+          </div>
+          <div class="swiper-slide">
+            <img src="advertise/advertise4.jpeg" alt="Advertisement 3" loading="lazy" />
+          </div>
+        </div>
+       
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+      <nav class="category-menu">
+        <ul>
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Clothes</a></li>
+          <li><a href="#">Arts &amp; Crafts</a></li>
+          <li><a href="#">Health</a></li>
+          <li><a href="#">Beauty</a></li>
+          <li><a href="#">Game</a></li>
+          <li><a href="#">Home &amp; Kitchen</a></li>
+        </ul>
+      </nav>
+
+      <section class="new-stores">
+        <h2>New Stores</h2>
+        <div class="swiper-parent">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/baberlogo.jpeg"
+                  alt="Baber Shop"
+                  loading="lazy"
+                />
+                <h3>Baber Shop</h3>
+              </div>
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/bicyclelogo.jpeg"
+                  alt="Bicycle Shop"
+                  loading="lazy"
+                />
+                <h3>Bicycle Shop</h3>
+              </div>
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/charitylogo.jpeg"
+                  alt="Charity Shop"
+                  loading="lazy"
+                />
+                <h3>Charity Shop</h3>
+              </div>
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/closetlogo.jpeg"
+                  alt="Clothes Shop"
+                  loading="lazy"
+                />
+                <h3>Clothes Shop</h3>
+              </div>
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/jewelrylogo.jpeg"
+                  alt="Jewelry Shop"
+                  loading="lazy"
+                />
+                <h3>Jewelry Shop</h3>
+              </div>
+              <div class="swiper-slide store-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="logo/bakerylogo.png"
+                  alt="Bakery Shop"
+                  loading="lazy"
+                />
+                <h3>Bakery Shop</h3>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="new-products">
+        <h2>New Products</h2>
+        <div class="swiper-parent">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/mice.png"
+                  alt="Logitech M360 Wireless Mice"
+                  loading="lazy"
+                />
+                <h3>Logitech M360 Wireless Mice</h3>
+                <p class="price">$34.99</p>
+                <div class="rating">★★★★☆</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/lego.jpeg"
+                  alt="LLEGO Pirates Loot Island"
+                  loading="lazy"
+                />
+                <h3>LLEGO Pirates Loot Island</h3>
+                <p class="price">$163.93</p>
+                <div class="rating">★★★☆☆</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/cream.jpeg"
+                  alt="Kiehl's Ultra Facial Cream"
+                  loading="lazy"
+                />
+                <h3>Kiehl's Ultra Facial Cream</h3>
+                <p class="price">$67.00</p>
+                <div class="rating">★★★★★</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/case.jpeg"
+                  alt="Cute Stitch Case for AirPods"
+                  loading="lazy"
+                />
+                <h3>Cute Stitch Case for AirPods</h3>
+                <p class="price">from $8.99</p>
+                <div class="rating">★★★☆☆</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/speaker.jpeg"
+                  alt="Echo Studio"
+                  loading="lazy"
+                />
+                <h3>Echo Studio</h3>
+                <p class="price">$144.87</p>
+                <div class="rating">★★★★★</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/tshirt.jpeg"
+                  alt="Gildan T-Shirt (Pack of 5)"
+                  loading="lazy"
+                />
+                <h3>Gildan T-Shirt (Pack of 5)</h3>
+                <p class="price">$19.99</p>
+                <div class="rating">★★★★☆</div>
+              </div>
+              <div class="swiper-slide product-card">
+                <img
+                  height="100"
+                  width="150"
+                  src="products/drone.jpeg"
+                  alt="DJI Mavic Mini"
+                  loading="lazy"
+                />
+                <h3>DJI Mavic Mini</h3>
+                <p class="price">$287.99</p>
+                <div class="rating">★★★★☆</div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <button class="swiper-button-prev"></button>
+              <button class="swiper-button-next"></button>
+            </div>
+          </div>
+      </section>
+
+
+
+      <section class="new-stores">
+        <h2>New Stores</h2>
+        <div class="swiper-parent">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide product-card">
+                <img src="../html/store1_logo.png" alt="Store 1 Logo">
+                <p>Walmart</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store2_logo.png" alt="Store 2 Logo">
+                <p>Expedia</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store3_logo.png" alt="Store 3 Logo">
+                <p>Best Buy</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store4_logo.png" alt="Store 4 Logo">
+                <p>eBay</p>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
+          </div>
+        </div>
+      </section>
+      <section class="new-stores">
+        <h2>New Stores</h2>
+        <div class="swiper-parent">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide product-card">
+                <img src="../html/store5_logo.png" alt="Store 5 Logo">
+                <p>Etsy</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store6_logo.png" alt="Store 6 Logo">
+                <p>adidas</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store7_logo.png" alt="Store 7 Logo">
+                <p>Nike</p>
+              </div>
+              <div class="swiper-slide product-card">
+                <img src="../html/store8_logo.png" alt="Store 8 Logo">
+                <p>Apple</p>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <button class="swiper-button-prev"></button>
+            <button class="swiper-button-next"></button>
+          </div>
+        </div>
+      </section>
+      <!--<div class="container">
+        <section id="new-stores">
+          <h2>New Stores</h2>
+          <div class="stores-list">
+            div class="store">
+              <img src="../html/store1_logo.png" alt="Store 1 Logo">
+              <p>Walmart</p>
+            </div>
+            <div class="store">
+              <img src="../html/store2_logo.png" alt="Store 2 Logo">
+              <p>Expedia</p>
+            </div><
+            <div class="store">
+              <img src="../html/store3_logo.png" alt="Store 3 Logo">
+              <p>Best Buy</p>
+            </div>
+            <div class="store">
+              <img src="../html/store4_logo.png" alt="Store 4 Logo">
+              <p>eBay</p>
+            </div>
+          </div>
+        </section>
+    
+        <section id="featured-stores">
+          <h2>Featured Stores</h2>
+          <div class="stores-list">
+            <div class="store">
+              <img src="../html/store5_logo.png" alt="Store 5 Logo">
+              <p>Etsy</p>
+            </div>
+            <div class="store">
+              <img src="../html/store6_logo.png" alt="Store 6 Logo">
+              <p>adidas</p>
+            </div>
+            <div class="store">
+              <img src="../html/store7_logo.png" alt="Store 7 Logo">
+              <p>Nike</p>
+            </div>
+            <div class="store">
+              <img src="../html/store8_logo.png" alt="Store 8 Logo">
+              <p>Apple</p>
+            </div>
+          </div>
+        </section>
+        <br></br>
+        <br></br>
+      </div>-->
+    
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="../html/copyright_tos_privacypolicy.html">Copyright</a></li>
+          <li><a href="../html/copyright_tos_privacypolicy.html">ToS (Term of Service)</a></li>
+          <li><a href="../html/copyright_tos_privacypolicy.html">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
